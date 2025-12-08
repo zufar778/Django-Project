@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Confirmation{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card card-confirm p-4">
+      <div class="text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="mb-3 text-success">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01M5 13a7 7 0 1114 0 7 7 0 01-14 0z"/>
+        </svg>
+
+        <h3 class="mb-2">Tasdiqlash kerak</h3>
+        <p class="muted mb-4">Siz ushbu amalni bajarishni xohlaysizmi? Iltimos, tasdiqlang.</p>
+      </div>
+
+      <!-- Primary form (POST) -->
+      <form method="post" action="{% url 'Bought' %}">
+        {% csrf_token %}
+        <!-- Agar kerak bo'lsa hidden field bilan id yuboring -->
+        <input type="hidden" name="object_id" value="{{ object_id|default:'' }}">
+
+        <div class="d-flex justify-content-center gap-3">
+          <button href="{% url 'Bought' %}" name="answer" value="yes" type="submit" class="btn btn-yes px-4 py-2">Yes — Tasdiqlayman</button>
+
+          <button href="/" name="answer" value="no" type="submit" class="btn btn-no px-4 py-2">No — Bekor qilish</button>
+        </div>
+      </form>
+
+      <hr class="my-4">
+
+      <div class="text-center">
+        <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Yana ma'lumot kerak?</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: qo'shimcha ma'lumot -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ishni tasdiqlashdan oldin</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bu amal qaytarib bo‘lmaydigan bo‘lishi mumkin. Iltimos, barcha ma'lumotlarni tekshiring.</p>
+        <ul>
+          <li>Element: <strong>{{ object_name|default:"—" }}</strong></li>
+          <li>Sana: <strong>{{ timestamp|default:"—" }}</strong></li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-no" data-bs-dismiss="modal">Yopish</button>
+        <form method="post" action="{% url 'Bought' %}">
+          {% csrf_token %}
+          <input type="hidden" name="object_id" value="{{ object_id|default:'' }}">
+          <button href="{% url 'Bought' %}" name="answer" value="yes" type="submit" class="btn btn-yes">Yes, tasdiqlayman</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

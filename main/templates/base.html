@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}My Site{% endblock %}</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* Small custom theme */
+    body { background: #f7fafc; color: #222; }
+    .card-confirm { border-radius: 18px; box-shadow: 0 10px 30px rgba(17,24,39,0.06); }
+    .btn-yes { background: linear-gradient(90deg,#16a34a,#22c55e); color:#fff; border:none; }
+    .btn-yes:hover { filter: brightness(0.95); }
+    .btn-no { background: #ffffff; border:1px solid #e5e7eb; color:#111; }
+    .hero { padding: 56px 0; }
+    .muted { color: #6b7280; }
+  </style>
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">MySite</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container my-5">
+  {% block content %}{% endblock %}
+</main>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>
