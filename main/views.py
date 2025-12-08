@@ -22,9 +22,14 @@ def detail(request, id):
     data = requests.get(f'https://dummyjson.com/products/{id}').json()
     return render(request, 'detail.html', {"data": data})
 
+def confirmation(request):
+    return render(request, 'confirmation.html')
 
+def base(request):
+    return render(request, 'base.html')
 
-
+def bought(request):
+    return render(request, 'bought.html')
 
 # Create your views here.
 
